@@ -1,7 +1,9 @@
-package com.example.fishingapp;
+package com.example.fishingapp.views;
 
 import android.os.Bundle;
 
+import com.example.fishingapp.R;
+import com.example.fishingapp.interfaces.IListInterface;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -10,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class listActivity extends AppCompatActivity {
+public class listActivity extends AppCompatActivity implements IListInterface.view {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,4 +30,10 @@ public class listActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void starFormActivity() {
+
+    }
+
 }

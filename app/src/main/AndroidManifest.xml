@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/fa_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FishingApp">
+        <activity android:name=".views.FormActivity"></activity>
         <activity
-            android:name=".listActivity"
+            android:name=".views.listActivity"
             android:label="@string/title_activity_list"
-            android:theme="@style/Theme.FishingApp.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.FishingApp.NoActionBar" />
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
