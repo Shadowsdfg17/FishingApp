@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.FormActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:ignore="MissingConstraints" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/buttonSave"
+                android:layout_width="78dp"
+                android:layout_height="94dp"
+                android:layout_marginStart="134dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonDelete"
+                app:layout_constraintTop_toBottomOf="@+id/released"
+                app:srcCompat="@drawable/guardar"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="78dp"
+                android:layout_height="94dp"
+                android:layout_marginStart="69dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/released"
+                app:srcCompat="@drawable/borrar"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/buttonDeleteImage"
+                android:layout_width="78dp"
+                android:layout_height="94dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="55dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/eliminar_imagen"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="104dp"
+                android:layout_height="118dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="50dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/imagen"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageCalendar"
+                android:layout_width="59dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="50dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                app:srcCompat="@drawable/calendario" />
+
+            <ImageView
+                android:id="@+id/imageFish"
+                android:layout_width="58dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageCalendar"
+                app:srcCompat="@drawable/carpa"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageSex"
+                android:layout_width="58dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageFish"
+                app:srcCompat="@drawable/sexo"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageFisher"
+                android:layout_width="59dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageFishingNet"
+                app:srcCompat="@drawable/pescador"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageFishingNet"
+                android:layout_width="59dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageWeight"
+                app:srcCompat="@drawable/red_de_pescar"
+                tools:ignore="MissingConstraints"
+                tools:srcCompat="@drawable/red_de_pescar" />
+
+            <ImageView
+                android:id="@+id/imageWeight"
+                android:layout_width="59dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageSex"
+                app:srcCompat="@drawable/peso"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageInformation"
+                android:layout_width="59dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageFisher"
+                app:srcCompat="@drawable/informacion"
+                tools:ignore="MissingConstraints" />
+
+            <Switch
+                android:id="@+id/released"
+                android:layout_width="221dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="103dp"
+                android:layout_marginTop="746dp"
+                android:text="Suelta"
+                android:textSize="36sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                tools:ignore="MissingConstraints" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageInformation"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Información"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageFisher"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pescador"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageFishingNet"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nº de Capturas"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageWeight"
+                app:layout_constraintTop_toBottomOf="@+id/spinner">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Peso"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textFish"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageFish"
+                app:layout_constraintTop_toBottomOf="@+id/textInputWeight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Tipo de pez"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputWeight"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="65dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageCalendar"
+                app:layout_constraintTop_toBottomOf="@+id/buttonDeleteImage">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="dd/mm/yy"
+                    android:textSize="24sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="240dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageSex"
+                app:layout_constraintTop_toBottomOf="@+id/textFish" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
