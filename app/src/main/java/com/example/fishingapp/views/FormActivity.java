@@ -25,7 +25,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         ImageButton button = findViewById(R.id.buttonSave);
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Formulario");
+        getSupportActionBar().setTitle(R.string.formTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         button.setOnClickListener(v -> {
             presenter.onClickSaveFish();

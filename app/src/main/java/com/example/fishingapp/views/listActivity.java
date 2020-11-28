@@ -8,10 +8,14 @@ import com.example.fishingapp.interfaces.IListInterface;
 import com.example.fishingapp.presenters.ListPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class listActivity extends AppCompatActivity implements IListInterface.view {
 
@@ -25,7 +29,7 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
         presenter = new ListPresenter(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Lista de capturas");
+        getSupportActionBar().setTitle(R.string.listTitle);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -33,6 +37,23 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
 
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.button_search:
+                presenter.onClickSearch();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onStart() {
         Log.d(TAG, "Starting onStart");
@@ -70,10 +91,18 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     }
 
     @Override
-    public void starFormActivity() {
+    public void startFormActivity() {
         Log.d(TAG, "Inside startFormActivity");
         Intent intent = new Intent(getApplicationContext(), FormActivity.class);
         startActivity(intent);
     }
+
+
+    public void startSearchActivity(){
+        Log.d(TAG, "Inside startSearchActivity");
+        Intent intent = new Intent(getApplicationContext(), searchActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -2,10 +2,14 @@ package com.example.fishingapp.interfaces;
 
 public interface IListInterface {
     public interface view{
-    void starFormActivity();
+    void startFormActivity();
+    void startSearchActivity();
     }
 
     public interface Presenter{
         void onClickAddFish();
+        void onClickSearch();
     }
+
+
 }

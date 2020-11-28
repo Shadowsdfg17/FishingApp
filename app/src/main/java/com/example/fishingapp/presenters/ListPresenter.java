@@ -18,6 +18,13 @@ public class ListPresenter implements IListInterface.Presenter {
     @Override
     public void onClickAddFish() {
         Log.d(TAG, "Inside onClickAddFish");
-        view.starFormActivity();
+        view.startFormActivity();
+    }
+
+
+    @SuppressLint("LongLogTag")
+    public void onClickSearch(){
+        Log.d(TAG, "Inside onClickSearch");
+        view.startSearchActivity();
     }
 }
