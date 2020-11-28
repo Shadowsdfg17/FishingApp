@@ -50,6 +50,10 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
             case R.id.button_search:
                 presenter.onClickSearch();
                 break;
+            case R.id.aboutus:
+                presenter.onClickAboutUs();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -101,6 +105,13 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     public void startSearchActivity(){
         Log.d(TAG, "Inside startSearchActivity");
         Intent intent = new Intent(getApplicationContext(), searchActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void starAboutUsActivity() {
+        Log.d(TAG, "Inside startAboutUsActivity");
+        Intent intent = new Intent(getApplicationContext(), aboutCrud.class);
         startActivity(intent);
     }
 

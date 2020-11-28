@@ -27,4 +27,12 @@ public class ListPresenter implements IListInterface.Presenter {
         Log.d(TAG, "Inside onClickSearch");
         view.startSearchActivity();
     }
+
+    @SuppressLint("LongLogTag")
+    public void onClickAboutUs() {
+        Log.d(TAG, "Inside onClickAboutUs");
+        view.starAboutUsActivity();
+    }
+
+
 }

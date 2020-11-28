@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/fa_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FishingApp">
-        <activity android:name=".views.aboutCrud"></activity>
+
+        <activity
+            android:name=".views.aboutCrud"
+            android:parentActivityName=".views.listActivity"/>
         <activity android:name=".views.searchActivity" />
         <activity
             android:name=".views.FormActivity"
