@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/button_search"
+        android:icon="@drawable/lupa"
+        android:title="Search"
+        app:showAsAction="ifRoom" />
+
+    <item android:title="Ordenar"
+        android:id="@+id/order"
+        app:showAsAction="never" />
+
+    <item android:title="Configuración"
+       android:id="@+id/configuration"
+        app:showAsAction="never"/>
+
+    <item android:title="Ayuda"
+        android:id="@+id/help"
+        app:showAsAction="never"/>
+
+    <item android:title="SobreAppCrud"
+        android:id="@+id/aboutus"
+        app:showAsAction="never"/>
+</menu>
