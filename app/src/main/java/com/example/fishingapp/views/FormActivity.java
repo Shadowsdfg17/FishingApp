@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.fishingapp.R;
@@ -23,7 +22,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         setContentView(R.layout.activity_form);
         presenter = new FormPresenter(this);
         ImageButton button = findViewById(R.id.buttonSave);
-        Toolbar toolbar = findViewById(R.id.toolbar3);
+        Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.formTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

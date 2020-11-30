@@ -13,7 +13,8 @@
         <activity
             android:name=".views.aboutCrud"
             android:parentActivityName=".views.listActivity"/>
-        <activity android:name=".views.searchActivity" />
+        <activity android:name=".views.searchActivity"
+            android:parentActivityName=".views.FormActivity"/>
         <activity
             android:name=".views.FormActivity"
             android:parentActivityName=".views.listActivity" />

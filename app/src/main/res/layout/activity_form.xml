@@ -7,7 +7,7 @@
     tools:context=".views.FormActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/toolbarSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSearch"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -243,7 +243,7 @@
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageWeight"
-                app:layout_constraintTop_toBottomOf="@+id/spinner">
+                app:layout_constraintTop_toBottomOf="@+id/spinnerSex">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -261,7 +261,7 @@
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageFish"
-                app:layout_constraintTop_toBottomOf="@+id/textInputWeight">
+                app:layout_constraintTop_toBottomOf="@+id/textDate">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -271,7 +271,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputWeight"
+                android:id="@+id/textDate"
                 android:layout_width="240dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="45dp"
@@ -289,7 +289,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerSex"
                 android:layout_width="240dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="45dp"

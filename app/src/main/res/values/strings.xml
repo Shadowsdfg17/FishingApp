@@ -12,4 +12,10 @@
     <string name="formTitle">Formulario</string>
     <string name="listTitle">Lista de capturas</string>
     <string name="aboutUs">Sobre appCrud</string>
+    <string name="Sexfemale">Hembra</string>
+    <string name="SexMale">Macho</string>
+    <string name="searchTitle">Buscar</string>
+    <string name="titlePickers">Obtener fecha y hora</string>
+    <string name="dateFormat">dd/mm/yyyy</string>
+
 </resources>
