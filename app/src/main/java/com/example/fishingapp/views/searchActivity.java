@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,18 +17,22 @@ import android.widget.Spinner;
 
 import com.example.fishingapp.R;
 import com.example.fishingapp.interfaces.IListInterface;
+import com.example.fishingapp.interfaces.ISearchActivity;
+import com.example.fishingapp.presenters.searchPresenter;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
-public class searchActivity extends AppCompatActivity implements IListInterface{
+public class searchActivity extends AppCompatActivity implements ISearchActivity.View {
 
-    private IListInterface.Presenter presenter;
+    private ISearchActivity.Presenter presenter;
     private static final String TAG = "views/searchActivity";
 
     private static final String CERO = "0";
     private static final String BARRA = "/";
+
+    private ImageButton searchButton;
 
 
     public final Calendar c = Calendar.getInstance();
@@ -41,16 +46,21 @@ public class searchActivity extends AppCompatActivity implements IListInterface{
     ImageButton imageCalendar2;
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        textDate = (EditText) findViewById(R.id.textDate);
+        textDate = (EditText) findViewById(R.id.editTextDate);
         imageCalendar2 = (ImageButton) findViewById(R.id.imageCalendar2);
-        imageCalendar2.setOnClickListener(v -> {
-
+        searchButton= findViewById(R.id.buttonSearch);
+        searchButton.setOnClickListener(v -> {
+            presenter.OnClickSearchButton();
         });
-       // presenter = new ListPresenter(this);
+        imageCalendar2.setOnClickListener(v -> {
+            presenter.OnClickDate();
+        });
+       presenter = new searchPresenter(this);
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.searchTitle);
@@ -62,15 +72,18 @@ public class searchActivity extends AppCompatActivity implements IListInterface{
 
     }
 
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imageCalendar2:
-                obtenerFecha();
-                break;
-        }
+
+
+
+
+    @Override
+    public void finishSearchActivity() {
+        finish();
+
     }
 
-    private void obtenerFecha(){
+    @Override
+    public void showDate() {
         DatePickerDialog recogerFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -84,6 +97,5 @@ public class searchActivity extends AppCompatActivity implements IListInterface{
 
         },any, mouth, day);
         recogerFecha.show();
-
     }
 }

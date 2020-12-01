@@ -4,7 +4,7 @@ public interface IListInterface {
     public interface view{
     void startFormActivity();
     void startSearchActivity();
-    void starAboutUsActivity();
+    void startAboutUsActivity();
     }
 
     public interface Presenter{

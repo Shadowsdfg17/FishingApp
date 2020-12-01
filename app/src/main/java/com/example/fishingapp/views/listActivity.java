@@ -109,7 +109,7 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     }
 
     @Override
-    public void starAboutUsActivity() {
+    public void startAboutUsActivity() {
         Log.d(TAG, "Inside startAboutUsActivity");
         Intent intent = new Intent(getApplicationContext(), aboutCrud.class);
         startActivity(intent);

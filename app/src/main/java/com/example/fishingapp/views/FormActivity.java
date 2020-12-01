@@ -21,7 +21,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         presenter = new FormPresenter(this);
-        ImageButton button = findViewById(R.id.buttonSave);
+        ImageButton button = findViewById(R.id.buttonSearch);
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.formTitle);

@@ -31,7 +31,7 @@ public class ListPresenter implements IListInterface.Presenter {
     @SuppressLint("LongLogTag")
     public void onClickAboutUs() {
         Log.d(TAG, "Inside onClickAboutUs");
-        view.starAboutUsActivity();
+        view.startAboutUsActivity();
     }
 
 

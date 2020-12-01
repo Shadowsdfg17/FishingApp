@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/buttonSave"
+                android:id="@+id/buttonSearch"
                 android:layout_width="78dp"
                 android:layout_height="94dp"
                 android:layout_marginStart="134dp"
