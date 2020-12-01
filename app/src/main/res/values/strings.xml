@@ -17,5 +17,17 @@
     <string name="searchTitle">Buscar</string>
     <string name="titlePickers">Obtener fecha y hora</string>
     <string name="dateFormat">dd/mm/yyyy</string>
+    <string name="error_date">Error, fecha incorrecta Ej: 20/01/2020</string>
+    <string name="fish_error">Error, inserta un tipo de pez Ej: Carpa</string>
+    <string name="weight_error">Error,inserte el peso correcto Ej: 4,5kg</string>
+    <string name="captures_error">Error, número de capturas incorrecto Ej: 1</string>
+    <string name="fisher_error">Error, introduce un nombre correcto Ej: andrea</string>
+    <string name="information_error">Error,introduce la información correcta Ej: agua dulce</string>
+    <string name="error_date2">Error, campo vacío</string>
+    <string name="error_fish2">Error, campo vacío</string>
+    <string name="error_weight2">Error, campo vacío</string>
+    <string name="error_captures2">Error, campo vacío</string>
+    <string name="error_fisher2">Error, campo vacío</string>
+    <string name="error_information2">Error, campo vacío</string>
 
 </resources>

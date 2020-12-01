@@ -38,9 +38,9 @@ public class searchActivity extends AppCompatActivity implements ISearchActivity
     public final Calendar c = Calendar.getInstance();
 
 
-    final int mouth = c.get(Calendar.MONTH);
-    final int day = c.get(Calendar.DAY_OF_MONTH);
-    final int any = c.get(Calendar.YEAR);
+    public final int mouth = c.get(Calendar.MONTH);
+    public final int day = c.get(Calendar.DAY_OF_MONTH);
+    public final int any = c.get(Calendar.YEAR);
 
     EditText textDate;
     ImageButton imageCalendar2;

@@ -1,0 +1,143 @@
+package com.example.fishingapp.models;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class EntityFish {
+
+    private String date;
+    private String fish;
+    private String weight;
+    private String captures;
+    private String fisher;
+    private String information;
+
+    public EntityFish() {
+
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public boolean setDate(String date) {
+        Pattern pat = Pattern.compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)" +
+                "(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)" +
+                "0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|" +
+                "(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)" +
+                "(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+        Matcher mat = pat.matcher(date);
+        if (mat.find()) {
+            this.date = date;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String getFish() {
+        return fish;
+    }
+
+    public int setFish(String fish) {
+        int error = 0;
+        if (!fish.isEmpty()){
+            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Matcher mat = pat.matcher(fish);
+            if(!mat.find()){
+                error = 2;
+            }else {
+                this.fish=fish.toLowerCase();
+            }
+
+        }else{
+            error = 1;
+        }
+        return error;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public int setWeight(String weight) {
+        int error = 0;
+        if (!weight.isEmpty()){
+            Pattern pat = Pattern.compile("[^A-Za-z0-9.@_-~#]+");
+            Matcher mat = pat.matcher(weight);
+            if(!mat.find()){
+                error = 2;
+            }else {
+                this.weight=weight.toLowerCase();
+            }
+
+        }else{
+            error = 1;
+        }
+        return error;
+    }
+
+
+    public String getCaptures() {
+        return captures;
+    }
+
+    public int setCaptures(String captures) {
+        int error = 0;
+        if (!captures.isEmpty()){
+            Pattern pat = Pattern.compile("[0-9]*");
+            Matcher mat = pat.matcher(captures);
+            if(!mat.find()){
+                error = 2;
+            }else {
+                this.captures=captures;
+            }
+
+        }else{
+            error = 1;
+        }
+        return error;
+    }
+
+    public String getFisher() {
+        return fisher;
+    }
+
+    public int setFisher(String fisher) {
+        int error = 0;
+        if (!fisher.isEmpty()){
+            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Matcher mat = pat.matcher(fisher);
+            if(!mat.find()){
+                error = 2;
+            }else {
+                this.fisher=fisher.toLowerCase();
+            }
+
+        }else{
+            error = 1;
+        }
+        return error;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public int setInformation(String information) {
+        int error = 0;
+        if (!information.isEmpty()){
+            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Matcher mat = pat.matcher(information);
+            if(!mat.find()){
+                error = 2;
+            }else {
+                this.information=information.toLowerCase();
+            }
+
+        }else{
+            error = 1;
+        }
+        return error;
+    }
+}

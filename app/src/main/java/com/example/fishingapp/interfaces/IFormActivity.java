@@ -8,6 +8,8 @@ public interface IFormActivity {
 
         public interface Presenter{
             void onClickSaveFish();
+            String getError(String error_code);
+
         }
     }
 
