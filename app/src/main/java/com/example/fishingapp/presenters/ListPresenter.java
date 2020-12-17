@@ -14,6 +14,18 @@ public class ListPresenter implements IListInterface.Presenter {
         this.view = view;
     }
 
+
+    public void onSwipe(int position) {
+        view.startSwipe(position);
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public void onToast() {
+        Log.d(TAG,"Inside onToast");
+        view.startDeleteToast();
+    }
+
     @SuppressLint("LongLogTag")
     @Override
     public void onClickAddFish() {
@@ -32,6 +44,14 @@ public class ListPresenter implements IListInterface.Presenter {
     public void onClickAboutUs() {
         Log.d(TAG, "Inside onClickAboutUs");
         view.startAboutUsActivity();
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public void onClickRecyclerViewItem(String id) {
+        Log.d(TAG, "Inside onClickRecyclerViewItem");
+        view.startFormActivity(id);
+
     }
 
 

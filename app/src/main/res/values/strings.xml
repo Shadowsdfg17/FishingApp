@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">FishingApp</string>
-    <string name="title_activity_list">ListActivity</string>
+    <string name="app_name" translatable="false">FishingApp</string>
+    <string name="title_activity_list" translatable="false">ListActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
     <string name="formTitle">Formulario</string>
     <string name="listTitle">Lista de capturas</string>
     <string name="aboutUs">Sobre appCrud</string>
@@ -16,7 +16,7 @@
     <string name="SexMale">Macho</string>
     <string name="searchTitle">Buscar</string>
     <string name="titlePickers">Obtener fecha y hora</string>
-    <string name="dateFormat">dd/mm/yyyy</string>
+    <string name="dateFormat" translatable="false">dd/mm/yyyy</string>
     <string name="error_date">Error, fecha incorrecta Ej: 20/01/2020</string>
     <string name="fish_error">Error, inserta un tipo de pez Ej: Carpa</string>
     <string name="weight_error">Error,inserte el peso correcto Ej: 4,5kg</string>
@@ -29,5 +29,12 @@
     <string name="error_captures2">Error, campo vacío</string>
     <string name="error_fisher2">Error, campo vacío</string>
     <string name="error_information2">Error, campo vacío</string>
+    <string name="addSex">Añade un sexo nuevo</string>
+    <string name="insertSex">Inserta nuevo sexo</string>
+    <string name="insert">Insertar</string>
+    <string name="addCorrect">Se ha añadido</string>
+    <string name="cancel">Cancelar</string>
+    <string name="contac">Contacto: andreadiaztorres069@gmail.com</string>
+    <string name="developer">Desarrollador: Andrea Díaz Torres</string>
 
 </resources>

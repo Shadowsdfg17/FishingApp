@@ -63,7 +63,6 @@
                 android:layout_height="59dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="39dp"
-                app:layout_constraintEnd_toStartOf="@+id/textFish"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageCalendar2"
                 app:srcCompat="@drawable/carpa"
@@ -92,12 +91,12 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="dd/mm/yy"
-                app:layout_constraintBottom_toTopOf="@+id/textFish"
+                android:fontFamily="@font/aerolite"
                 app:layout_constraintStart_toEndOf="@+id/imageCalendar2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFish"
+                android:id="@+id/fish"
                 android:layout_width="240dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="45dp"
@@ -111,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tipo de pez"
+                    android:fontFamily="@font/aerolite"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,7 +124,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageSex"
-                app:layout_constraintTop_toBottomOf="@+id/textFish" />
+                app:layout_constraintTop_toBottomOf="@+id/fish" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -5,34 +5,61 @@ import java.util.regex.Pattern;
 
 public class EntityFish {
 
+    private String id;
     private String date;
     private String fish;
     private String weight;
     private String captures;
     private String fisher;
     private String information;
+    private String image;
+
+
 
     public EntityFish() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDate() {
         return date;
     }
 
-    public boolean setDate(String date) {
-        Pattern pat = Pattern.compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)" +
-                "(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)" +
-                "0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|" +
-                "(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)" +
-                "(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
-        Matcher mat = pat.matcher(date);
-        if (mat.find()) {
-            this.date = date;
-            return true;
-        } else {
-            return false;
+    public int setDate(String date) {
+        int error = 0;
+        if(!date.isEmpty()){
+            Pattern pat = Pattern.compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)" +
+                    "(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)" +
+                    "0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|" +
+                    "(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)" +
+                    "(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+            Matcher mat = pat.matcher(date);
+            if (!mat.find()) {
+                error= 2;
+            } else {
+                this.date=date;
+            }
+        }else {
+            error = 1;
         }
+        return error;
+
+
     }
 
     public String getFish() {
@@ -42,7 +69,7 @@ public class EntityFish {
     public int setFish(String fish) {
         int error = 0;
         if (!fish.isEmpty()){
-            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(fish);
             if(!mat.find()){
                 error = 2;
@@ -63,7 +90,7 @@ public class EntityFish {
     public int setWeight(String weight) {
         int error = 0;
         if (!weight.isEmpty()){
-            Pattern pat = Pattern.compile("[^A-Za-z0-9.@_-~#]+");
+            Pattern pat = Pattern.compile("[^A-Za-z0-9.@_-~#\\s]+");
             Matcher mat = pat.matcher(weight);
             if(!mat.find()){
                 error = 2;
@@ -85,7 +112,7 @@ public class EntityFish {
     public int setCaptures(String captures) {
         int error = 0;
         if (!captures.isEmpty()){
-            Pattern pat = Pattern.compile("[0-9]*");
+            Pattern pat = Pattern.compile("[0-9]");
             Matcher mat = pat.matcher(captures);
             if(!mat.find()){
                 error = 2;
@@ -106,7 +133,7 @@ public class EntityFish {
     public int setFisher(String fisher) {
         int error = 0;
         if (!fisher.isEmpty()){
-            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(fisher);
             if(!mat.find()){
                 error = 2;
@@ -127,7 +154,7 @@ public class EntityFish {
     public int setInformation(String information) {
         int error = 0;
         if (!information.isEmpty()){
-            Pattern pat = Pattern.compile("[a-zA-Z]");
+            Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(information);
             if(!mat.find()){
                 error = 2;

@@ -20,7 +20,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarSearch"
         app:layout_constraintVertical_bias="1.0">
@@ -87,37 +87,14 @@
                 tools:ignore="MissingConstraints" />
 
             <ImageView
-                android:id="@+id/imageCalendar"
-                android:layout_width="59dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="50dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton"
-                app:srcCompat="@drawable/calendario" />
-
-            <ImageView
                 android:id="@+id/imageFish"
                 android:layout_width="58dp"
                 android:layout_height="59dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="74dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageCalendar"
+                app:layout_constraintTop_toBottomOf="@+id/buttonCalendar"
                 app:srcCompat="@drawable/carpa"
-                tools:ignore="MissingConstraints" />
-
-            <ImageView
-                android:id="@+id/imageSex"
-                android:layout_width="58dp"
-                android:layout_height="59dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageFish"
-                app:srcCompat="@drawable/sexo"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
@@ -125,7 +102,7 @@
                 android:layout_width="59dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="60dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageFishingNet"
@@ -137,7 +114,7 @@
                 android:layout_width="59dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="60dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageWeight"
@@ -150,10 +127,10 @@
                 android:layout_width="59dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageSex"
+                app:layout_constraintTop_toBottomOf="@+id/addSex"
                 app:srcCompat="@drawable/peso"
                 tools:ignore="MissingConstraints" />
 
@@ -162,7 +139,7 @@
                 android:layout_width="59dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="70dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageFisher"
@@ -174,7 +151,7 @@
                 android:layout_width="221dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="103dp"
-                android:layout_marginTop="746dp"
+                android:layout_marginTop="900dp"
                 android:text="Suelta"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -182,65 +159,69 @@
                 tools:ignore="MissingConstraints" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/informationTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="85dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageInformation"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+                app:layout_constraintTop_toBottomOf="@+id/fisherTIL">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/information"
+                    android:id="@+id/informationTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="Información"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
+                android:id="@+id/fisherTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="85dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageFisher"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                app:layout_constraintTop_toBottomOf="@+id/capturesTIL">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fisher"
+                    android:id="@+id/fisherTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="Pescador"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+                android:id="@+id/capturesTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="85dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageFishingNet"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+                app:layout_constraintTop_toBottomOf="@+id/weightTIL">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/captures"
+                    android:id="@+id/capturesTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="Nº de Capturas"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout3"
+                android:id="@+id/weightTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="85dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
@@ -249,47 +230,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/spinnerSex">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/weight"
+                    android:id="@+id/weightTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="Peso"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFish"
+                android:id="@+id/fishTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
+                android:layout_height="85dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageFish"
-                app:layout_constraintTop_toBottomOf="@+id/textDate">
+                app:layout_constraintTop_toBottomOf="@+id/dateTIL">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fish"
+                    android:id="@+id/fishTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="Tipo de pez"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textDate"
+                android:id="@+id/dateTIL"
                 android:layout_width="240dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="45dp"
+                android:layout_height="85dp"
                 android:layout_marginTop="65dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageCalendar"
                 app:layout_constraintTop_toBottomOf="@+id/buttonDeleteImage">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/date"
+                    android:id="@+id/dateTE"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/aerolite"
                     android:hint="dd/mm/yy"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -298,13 +280,34 @@
                 android:id="@+id/spinnerSex"
                 android:layout_width="240dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="45dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageSex"
-                app:layout_constraintTop_toBottomOf="@+id/textFish" />
+                app:layout_constraintTop_toBottomOf="@+id/fishTIL" />
+
+            <ImageButton
+                android:id="@+id/buttonCalendar"
+                android:layout_width="58dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="50dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                app:srcCompat="@drawable/calendario" />
+
+            <ImageButton
+                android:id="@+id/addSex"
+                android:layout_width="58dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageFish"
+                app:srcCompat="@drawable/sexo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

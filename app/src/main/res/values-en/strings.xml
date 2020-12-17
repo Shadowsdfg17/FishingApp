@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FishingApp</string>
+    <string name="formTitle">Form</string>
+    <string name="listTitle">Captures List</string>
+    <string name="aboutUs">About AppCrud</string>
+    <string name="Sexfemale">Female</string>
+    <string name="SexMale">Male</string>
+    <string name="searchTitle">Search</string>
+    <string name="titlePickers">Obtain Date and Hour</string>
+    <string name="error_date">Error, incorrect date</string>
+    <string name="fish_error">Error, insert type of fish</string>
+    <string name="weight_error">Error, insert weight of fish</string>
+    <string name="captures_error">Error, number of capture incorrect</string>
+    <string name="fisher_error">Error, insert a correct name</string>
+    <string name="information_error">Error,insert a correct information</string>
+    <string name="error_date2">Error, field empty</string>
+    <string name="error_fish2">Error, field empty</string>
+    <string name="error_weight2">Error, field empty</string>
+    <string name="error_captures2">Error, field empty</string>
+    <string name="error_fisher2">Error, field empty</string>
+    <string name="error_information2">Error, field empty</string>
+    <string name="addSex">Add new sex</string>
+    <string name="insertSex">Insert new sex</string>
+    <string name="insert">insert</string>
+    <string name="addCorrect">insert correct</string>
+    <string name="cancel">cancel</string>
+    <string name="contac">Contac: andreadiaztorres069@gmail.com</string>
+    <string name="developer">Developer: Andrea Díaz Torres</string>
+</resources>

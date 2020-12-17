@@ -22,44 +22,51 @@ public class FormPresenter implements IFormActivity.Presenter {
         view.finishFormActivity();
     }
 
+    @SuppressLint("LongLogTag")
+    public void OnClickDate(){
+        Log.d(TAG, "Inside onClickDate");
+        view.showDate();
+
+    }
+
     @Override
     public String getError(String error_code) {
         String error_msg = "";
         switch (error_code) {
-            case "Date":
+            case "Date2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_date);
                 break;
-            case "Date2":
+            case "Date":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_date2);
                 break;    
-            case "Fish":
+            case "Fish2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.fish_error);
                 break;
-            case "Fish2":
+            case "Fish":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_fish2);
                 break;   
-            case "Weight":
+            case "Weight2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.weight_error);
                 break;
-            case "Weight2":
+            case "Weight":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_weight2);
                 break;    
-            case "Captures":
+            case "Captures2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.captures_error);
                 break;
-            case "Captures2":
+            case "Captures":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_captures2);
                 break;    
-            case "Fisher":
+            case "Fisher2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.fisher_error);
                 break;
-            case "Fisher2":
+            case "Fisher":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_fisher2);
                 break;    
-            case "Information":
+            case "Information2":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.information_error);
                 break;
-            case "Information2":
+            case "Information":
                 error_msg = MyApplication.getContext().getResources().getString(R.string.error_information2);
                 break;    
         }
