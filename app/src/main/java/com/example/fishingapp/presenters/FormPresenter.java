@@ -1,7 +1,12 @@
 package com.example.fishingapp.presenters;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.fishingapp.R;
 import com.example.fishingapp.interfaces.IFormActivity;
@@ -71,5 +76,49 @@ public class FormPresenter implements IFormActivity.Presenter {
                 break;    
         }
         return error_msg;
+    }
+
+
+    @Override
+    public void onClickDeleteForm() {
+        view.alertDeleteImage();
+    }
+
+    @Override
+    public void onClickAcceptDelete() {
+        view.finishFormActivity();
+    }
+
+    @Override
+    public void onClickImage() {
+        int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(MyApplication.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.d("FormPresenter", "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
+
+        if (WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED) {
+            //------PERMISO DENEGADO------
+            // A partir de Marshmallow (6.0) se pide aceptar o rechazar el permiso en tiempo de ejecución
+            // En las versiones anteriores no es posible hacerlo
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                view.IntentChooser();
+                // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+                // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+            } else {
+                view.showError();
+            }
+        } else {
+            //--------PERMISO ACEPTADO-------
+            view.selectImage();
+        }
+    }
+
+
+    @Override
+    public void PermissionGranted() {
+        view.selectImage();
+    }
+
+    @Override
+    public void PermissionDenied() {
+        view.showError();
     }
 }

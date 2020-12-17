@@ -2,20 +2,32 @@ package com.example.fishingapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SearchRecentSuggestionsProvider;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,12 +36,19 @@ import com.example.fishingapp.R;
 import com.example.fishingapp.interfaces.IFormActivity;
 import com.example.fishingapp.models.EntityFish;
 import com.example.fishingapp.presenters.FormPresenter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Calendar;
 
 public class FormActivity extends AppCompatActivity implements IFormActivity.view {
+
+
+    //-----------VARIABLES-----------
 
     private String id;
 
@@ -50,14 +69,21 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     TextInputEditText DateTE;
     ImageButton imageSex;
 
+    private static final int REQUEST_CAPTURE_IMAGE = 200;
+    private static final int REQUEST_SELECT_IMAGE = 201;
+    private Uri uri;
+    final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
+    private Context myContext;
+    private ConstraintLayout constraintLayoutFormActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         presenter = new FormPresenter(this);
         ImageButton button = findViewById(R.id.buttonSearch);
-        imageSex=findViewById(R.id.addSex);
-        imageCalendar2=findViewById(R.id.buttonCalendar);
+        imageSex = findViewById(R.id.addSex);
+        imageCalendar2 = findViewById(R.id.buttonCalendar);
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.formTitle);
@@ -74,7 +100,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         //-----------SPINNER--------------
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerSex);
-        String[] sex = {getString(R.string.Sexfemale),getString(R.string.SexMale)};
+        String[] sex = {getString(R.string.Sexfemale), getString(R.string.SexMale)};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sex));
 
 
@@ -91,25 +117,25 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         builder.setPositiveButton(R.string.insert, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), R.string.addCorrect,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.addCorrect, Toast.LENGTH_LONG).show();
                 Log.i(TAG, "Yes button Clicked");
             }
         });
         builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.i(TAG,"Cancel button Clicked");
+                Log.i(TAG, "Cancel button Clicked");
                 dialog.dismiss();
             }
         });
+
+        //--------DIALOGO DE ALERTA----------
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setView(dialog);
         imageSex.setOnClickListener(v -> {
             alertDialog.show();
         });
-
-
 
 
         //-----------GENERA LOS MENSAJES DE ERROR---------------
@@ -131,12 +157,12 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setDate(DateTE.getText().toString()) == 1) {
                         DateTIL.setError(presenter.getError("Date"));
                         DateTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if(fish.setDate(DateTE.getText().toString()) == 2) {
+                    } else if (fish.setDate(DateTE.getText().toString()) == 2) {
                         DateTIL.setError(presenter.getError("Date2"));
                         DateTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
 
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     DateTIL.setError(null);
 
@@ -145,7 +171,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
             }
         });
 
-    //--------TIPO DE PEZ-------------
+        //--------TIPO DE PEZ-------------
 
         TextInputLayout FishTIL;
         TextInputEditText FishTE;
@@ -160,12 +186,12 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setFish(FishTE.getText().toString()) == 1) {
                         FishTIL.setError(presenter.getError("Fish"));
                         FishTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if(fish.setFish(FishTE.getText().toString()) == 2){
+                    } else if (fish.setFish(FishTE.getText().toString()) == 2) {
                         FishTIL.setError(presenter.getError("Fish2"));
                         FishTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
 
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     FishTIL.setError(null);
 
@@ -189,11 +215,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setWeight(WeightTE.getText().toString()) == 1) {
                         WeightTIL.setError(presenter.getError("Weigth"));
                         WeightTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                        } else if(fish.setFish(WeightTE.getText().toString()) == 2) {
+                    } else if (fish.setFish(WeightTE.getText().toString()) == 2) {
                         WeightTIL.setError(presenter.getError("Weight2"));
                         WeightTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     WeightTIL.setError(null);
 
@@ -206,7 +232,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
 
         TextInputLayout CapturesTIL;
         TextInputEditText CapturesTE;
-        CapturesTE= findViewById(R.id.capturesTE);
+        CapturesTE = findViewById(R.id.capturesTE);
         CapturesTIL = findViewById(R.id.capturesTIL);
 
         CapturesTE.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -217,11 +243,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setCaptures(CapturesTE.getText().toString()) == 1) {
                         CapturesTIL.setError(presenter.getError("Captures"));
                         CapturesTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if(fish.setFish(CapturesTE.getText().toString()) == 2) {
+                    } else if (fish.setFish(CapturesTE.getText().toString()) == 2) {
                         CapturesTIL.setError(presenter.getError("Captures2"));
                         CapturesTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     CapturesTIL.setError(null);
 
@@ -233,7 +259,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
 
         TextInputLayout FisherTIL;
         TextInputEditText FisherTE;
-        FisherTE= findViewById(R.id.fisherTE);
+        FisherTE = findViewById(R.id.fisherTE);
         FisherTIL = findViewById(R.id.fisherTIL);
 
         FisherTE.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -244,11 +270,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setFisher(FisherTE.getText().toString()) == 1) {
                         FisherTIL.setError(presenter.getError("Fisher"));
                         FisherTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if(fish.setFish(FisherTE.getText().toString()) == 2) {
+                    } else if (fish.setFish(FisherTE.getText().toString()) == 2) {
                         FisherTIL.setError(presenter.getError("Fisher2"));
                         FisherTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     FisherTIL.setError(null);
                 }
@@ -270,11 +296,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setInformation(InformationTE.getText().toString()) == 1) {
                         InformationTIL.setError(presenter.getError("Information"));
                         InformationTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if(fish.setFish(InformationTE.getText().toString()) == 2) {
+                    } else if (fish.setFish(InformationTE.getText().toString()) == 2) {
                         InformationTIL.setError(presenter.getError("Information2"));
                         InformationTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
-                }else{
+                } else {
                     Log.d("FormActivity", "Input EditText");
                     InformationTIL.setError(null);
 
@@ -285,16 +311,55 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         //-----------COGE LA ID-----------
 
         id = getIntent().getStringExtra("id");
-        Log.d(TAG,"getString");
-        if(id != null){
+        Log.d(TAG, "getString");
+        if (id != null) {
             FishTE.setText(id);
-        }else{
+        } else {
             //Deshbilitar el botón elimina
         }
 
 
+        ImageButton buttonGallery = (ImageButton) findViewById(R.id.imageButton);
+        buttonGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickImage();
+            }
+        });
+
+        deleteImage();
+
 
     }
+
+    //--------BORRAR IMAGEN----------
+
+    public void deleteImage(){
+        ImageButton deleteimage = (ImageButton) findViewById(R.id.buttonDeleteImage);
+        deleteimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageButton buttonGallery = findViewById(R.id.imageButton);
+                buttonGallery.setImageBitmap(null);
+            }
+        });
+    }
+
+
+
+    //--------SE LE PIDE AL SISTEMA UNA IMAGEN DEL DISPOSITIVO----------
+
+
+    public void selectPicture(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getString(R.string.selectImage)),
+                REQUEST_SELECT_IMAGE);
+    }
+
+    //--------MUESTRA FECHA-------------
 
     @Override
     public void showDate() {
@@ -311,6 +376,133 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
 
         },any, mouth, day);
         recogerFecha.show();
+    }
+
+
+    //--------ALERT AL BORRAR LA IMAGEN-----------
+
+    @Override
+    public void alertDeleteImage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
+        builder.setTitle(R.string.deleteAlert);
+
+        builder.setPositiveButton(R.string.confirmDelete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.onClickAcceptDelete();
+                // Toast.makeText(getApplicationContext(),"Yes button Clicked", Toast.LENGTH_LONG).show();
+                Log.i("Code2care ", "Yes button Clicked!");
+            }
+        });
+
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //    Toast.makeText(getApplicationContext(),"Cancel button Clicked",Toast.LENGTH_LONG).show();
+                Log.i("Code2care ","Cancel button Clicked!");
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    //-----------SELECCIONA IMAGEN DEL DISPOSITIVO------------
+
+    @Override
+    public void selectImage() {
+        // Se le pide al sistema una imagen del dispositivo
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getResources().getString(R.string.chooseImage)),
+                REQUEST_SELECT_IMAGE);
+    }
+
+    //---------MUESTRA ERROR----------
+
+    @Override
+    public void showError() {
+        Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.permissionDenied), Snackbar.LENGTH_LONG).show();
+    }
+
+    //--------PIDE LOS PERMISOS-------
+
+    @Override
+    public void IntentChooser() {
+        ActivityCompat.requestPermissions(FormActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+    }
+
+    //----------RESULTADO DEL PEDIDO DE PERMISOS---------
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case CODE_WRITE_EXTERNAL_STORAGE_PERMISSION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    presenter.PermissionGranted();
+                } else {
+                    presenter.PermissionDenied();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    //-----------RESULTADO DE LOS PERMISOS--------
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+
+            case (REQUEST_CAPTURE_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto URI al imageView
+                    ImageButton imageButton = findViewById(R.id.imageButton);
+                    imageButton.setImageURI(uri);
+
+                    // Se le envía un broadcast a la Galería para que se actualice
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    mediaScanIntent.setData(uri);
+                    sendBroadcast(mediaScanIntent);
+
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    // Se borra el archivo temporal
+                    File file = new File(uri.getPath());
+                    file.delete();
+                }
+                break;
+
+            case (REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto Bitmap
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        // Se leen los bytes de la imagen
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Se transformam los bytes de la imagen a un Bitmap
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                        // Se carga el Bitmap en el ImageButton
+                        Bitmap imageScaled = Bitmap.createScaledBitmap(bmp, 200, 200, false);
+                        ImageButton imageButton = findViewById(R.id.imageButton);
+                        imageButton.setImageBitmap(imageScaled);
+                    }
+                }
+                break;
+        }
     }
 
 

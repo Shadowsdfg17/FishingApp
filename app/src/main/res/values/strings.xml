@@ -36,5 +36,10 @@
     <string name="cancel">Cancelar</string>
     <string name="contac">Contacto: andreadiaztorres069@gmail.com</string>
     <string name="developer">Desarrollador: Andrea Díaz Torres</string>
+    <string name="selectImage">Selecciona la imagen que deseas</string>
+    <string name="permissionDenied">Permiso denegado</string>
+    <string name="chooseImage">Selecciona la imagen que deseas</string>
+    <string name="deleteAlert">¿Está seguro que desea eliminar?</string>
+    <string name="confirmDelete">Confirmar eliminación</string>
 
 </resources>
