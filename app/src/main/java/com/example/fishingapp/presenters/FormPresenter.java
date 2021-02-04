@@ -11,20 +11,29 @@ import androidx.core.content.ContextCompat;
 import com.example.fishingapp.R;
 import com.example.fishingapp.interfaces.IFormActivity;
 import com.example.fishingapp.interfaces.IListInterface;
+import com.example.fishingapp.models.EntityFish;
+import com.example.fishingapp.models.FishModel;
 import com.example.fishingapp.views.MyApplication;
+
+import java.util.ArrayList;
 
 public class FormPresenter implements IFormActivity.Presenter {
 
     private IFormActivity.view view;
     private static final String TAG = "presenters/FormPresenter";
+    private final FishModel model = new FishModel();
 
     public FormPresenter(IFormActivity.view view) {this.view=view;}
 
     @SuppressLint("LongLogTag")
     @Override
-    public void onClickSaveFish() {
+    public void onClickSaveFish(EntityFish fish, boolean fl) {
         Log.d(TAG, "Inside onClickSaveFish");
-        view.finishFormActivity();
+        if(fl){
+            model.insert(fish);
+        }else{
+            model.updateFish(fish);
+        }
     }
 
     @SuppressLint("LongLogTag")
@@ -84,6 +93,7 @@ public class FormPresenter implements IFormActivity.Presenter {
         view.alertDeleteImage();
     }
 
+
     @Override
     public void onClickAcceptDelete() {
         view.finishFormActivity();
@@ -120,5 +130,19 @@ public class FormPresenter implements IFormActivity.Presenter {
     @Override
     public void PermissionDenied() {
         view.showError();
+    }
+
+    @Override
+    public boolean insertFish(EntityFish fish) {
+        return model.insert(fish);
+    }
+
+    @Override
+    public ArrayList<String> getAllSex() {
+        return model.getAllSexs();
+    }
+
+    public EntityFish getItemsById(String id){
+        return model.getById(id);
     }
 }

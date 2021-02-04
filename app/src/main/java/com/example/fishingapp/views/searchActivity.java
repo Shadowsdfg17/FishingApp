@@ -5,23 +5,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.fishingapp.R;
-import com.example.fishingapp.interfaces.IListInterface;
 import com.example.fishingapp.interfaces.ISearchActivity;
 import com.example.fishingapp.presenters.searchPresenter;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class searchActivity extends AppCompatActivity implements ISearchActivity.View {
@@ -33,6 +29,9 @@ public class searchActivity extends AppCompatActivity implements ISearchActivity
     private static final String BARRA = "/";
 
     private ImageButton searchButton;
+
+    public EditText editTextFish;
+    public Spinner spinner;
 
 
     public final Calendar c = Calendar.getInstance();
@@ -53,7 +52,7 @@ public class searchActivity extends AppCompatActivity implements ISearchActivity
         setContentView(R.layout.activity_search);
         textDate = (EditText) findViewById(R.id.editTextDate);
         imageCalendar2 = (ImageButton) findViewById(R.id.imageCalendar2);
-        searchButton= findViewById(R.id.buttonSearch);
+        searchButton= findViewById(R.id.buttonSave);
         searchButton.setOnClickListener(v -> {
             presenter.OnClickSearchButton();
         });
@@ -66,9 +65,14 @@ public class searchActivity extends AppCompatActivity implements ISearchActivity
         getSupportActionBar().setTitle(R.string.searchTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerSex);
-        String[] sex = {getString(R.string.Sexfemale),getString(R.string.SexMale)};
+        editTextFish = findViewById(R.id.editTextFish);
+
+         spinner = (Spinner) findViewById(R.id.spinnerSexSearch);
+        ArrayList<String> sex = presenter.getAllSex();
+        sex.add(0,getString(R.string.selected));
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sex));
+
+
 
     }
 
@@ -78,6 +82,17 @@ public class searchActivity extends AppCompatActivity implements ISearchActivity
 
     @Override
     public void finishSearchActivity() {
+        Intent intent = new Intent();
+        if(textDate != null && !textDate.getText().toString().isEmpty()){
+            intent.putExtra("date", textDate.getText().toString());
+        }
+        if(editTextFish != null && !editTextFish.getText().toString().isEmpty()){
+            intent.putExtra("fish", editTextFish.getText().toString());
+        }
+        if(spinner != null && spinner.getSelectedItem().toString().equals(getString(R.string.selected))){
+            intent.putExtra("sex", spinner.getSelectedItem().toString());
+        }
+        setResult(1, intent);
         finish();
 
     }

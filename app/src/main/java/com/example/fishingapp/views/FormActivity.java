@@ -12,24 +12,24 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SearchRecentSuggestionsProvider;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.fishingapp.R;
@@ -40,9 +40,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class FormActivity extends AppCompatActivity implements IFormActivity.view {
@@ -51,6 +53,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     //-----------VARIABLES-----------
 
     private String id;
+    public Switch loose;
 
     private IFormActivity.Presenter presenter;
     private static final String TAG = "views/FormActivity";
@@ -61,6 +64,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     public final Calendar c = Calendar.getInstance();
 
 
+
     public final int mouth = c.get(Calendar.MONTH);
     public final int day = c.get(Calendar.DAY_OF_MONTH);
     public final int any = c.get(Calendar.YEAR);
@@ -69,54 +73,61 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     TextInputEditText DateTE;
     ImageButton imageSex;
 
+
     private static final int REQUEST_CAPTURE_IMAGE = 200;
     private static final int REQUEST_SELECT_IMAGE = 201;
     private Uri uri;
     final private int CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 123;
     private Context myContext;
     private ConstraintLayout constraintLayoutFormActivity;
+    private ArrayAdapter<String> adapter;
+    private EntityFish fish2 = new EntityFish();
+    private String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         presenter = new FormPresenter(this);
-        ImageButton button = findViewById(R.id.buttonSearch);
+        ImageButton button = findViewById(R.id.buttonSave);
         imageSex = findViewById(R.id.addSex);
+        loose=findViewById(R.id.loose);
+        ImageButton addImage= findViewById(R.id.addImage);
         imageCalendar2 = findViewById(R.id.buttonCalendar);
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.formTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        button.setOnClickListener(v -> {
-            presenter.onClickSaveFish();
-
-        });
 
         imageCalendar2.setOnClickListener(v -> {
             presenter.OnClickDate();
         });
 
+
         //-----------SPINNER--------------
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerSex);
-        String[] sex = {getString(R.string.Sexfemale), getString(R.string.SexMale)};
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sex));
+        ArrayList<String> sex = presenter.getAllSex();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sex);
+        spinner.setAdapter(adapter);
 
 
         //----------AÑADIR SEXO------------
+
         AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
         builder.setTitle(R.string.addSex);
         builder.setMessage(R.string.insertSex);
-        EditText dialog = new EditText(FormActivity.this);
+        EditText editText = new EditText(FormActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
-        dialog.setLayoutParams(lp);
+        editText.setLayoutParams(lp);
         builder.setPositiveButton(R.string.insert, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                adapter.add(editText.getText().toString());
+                spinner.setSelection(adapter.getPosition(editText.getText().toString()));
                 Toast.makeText(getApplicationContext(), R.string.addCorrect, Toast.LENGTH_LONG).show();
                 Log.i(TAG, "Yes button Clicked");
             }
@@ -132,7 +143,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         //--------DIALOGO DE ALERTA----------
 
         AlertDialog alertDialog = builder.create();
-        alertDialog.setView(dialog);
+        alertDialog.setView(editText);
         imageSex.setOnClickListener(v -> {
             alertDialog.show();
         });
@@ -319,7 +330,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         }
 
 
-        ImageButton buttonGallery = (ImageButton) findViewById(R.id.imageButton);
+        ImageButton buttonGallery = (ImageButton) findViewById(R.id.addImage);
         buttonGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -328,6 +339,71 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         });
 
         deleteImage();
+
+
+
+        id=getIntent().getStringExtra("id");
+
+        if(id!=null){
+            EntityFish fish3=presenter.getItemsById(id);
+            fish2.setId(id);
+
+            DateTE.setText(fish3.getDate());
+            FishTE.setText(fish3.getFish());
+            WeightTE.setText(fish3.getWeight());
+            CapturesTE.setText(fish3.getCaptures());
+            FisherTE.setText(fish3.getFisher());
+            InformationTE.setText(fish3.getInformation());
+            image=fish3.getImage();
+            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            buttonGallery.setImageBitmap(decodedByte);
+            spinner.setSelection(adapter.getPosition(fish3.getSex()));
+
+            //Recupero la info de esa entidad
+        }else{
+            ImageButton delete2 = (ImageButton) findViewById(R.id.buttonDelete);
+            delete2.setEnabled(false);
+        }
+
+
+        //------------INSERTAR FORMULARIO---------
+
+        button.setOnClickListener(v -> {
+            if(DateTE.getText().toString().isEmpty() && FishTE.getText().toString().isEmpty() && spinner.getSelectedItem().toString().isEmpty()
+                    && WeightTE.getText().toString().isEmpty() && CapturesTE.getText().toString().isEmpty() && FisherTE.getText().toString().isEmpty()
+                    && InformationTE.getText().toString().isEmpty()){
+                Log.d(TAG,"Missing Data");
+            }else{
+                fish.setDate(DateTE.getText().toString());
+                fish.setFish(FishTE.getText().toString());
+                fish.setSex(spinner.getSelectedItem().toString());
+                fish.setWeight(WeightTE.getText().toString());
+                fish.setCaptures(CapturesTE.getText().toString());
+                fish.setFisher(FisherTE.getText().toString());
+                fish.setInformation(InformationTE.getText().toString());
+                fish.setLoose(loose.isActivated());
+
+                if (addImage != null && addImage.getDrawable() != null) {
+                    Bitmap bitmap = ((BitmapDrawable) addImage.getDrawable()).getBitmap();
+                    if (bitmap != null) {
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream.toByteArray();
+                        String photoBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        fish.setImage(photoBase64);
+                    }
+                }
+                if(id!= null){
+                    presenter.onClickSaveFish(fish, false);
+                }else{
+
+                    presenter.onClickSaveFish(fish, true);
+                }
+            }
+            finish();
+
+        });
 
 
     }
@@ -339,7 +415,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         deleteimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageButton buttonGallery = findViewById(R.id.imageButton);
+                ImageButton buttonGallery = findViewById(R.id.addImage);
                 buttonGallery.setImageBitmap(null);
             }
         });
@@ -462,7 +538,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
             case (REQUEST_CAPTURE_IMAGE):
                 if (resultCode == Activity.RESULT_OK) {
                     // Se carga la imagen desde un objeto URI al imageView
-                    ImageButton imageButton = findViewById(R.id.imageButton);
+                    ImageButton imageButton = findViewById(R.id.addImage);
                     imageButton.setImageURI(uri);
 
                     // Se le envía un broadcast a la Galería para que se actualice
@@ -497,7 +573,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
 
                         // Se carga el Bitmap en el ImageButton
                         Bitmap imageScaled = Bitmap.createScaledBitmap(bmp, 200, 200, false);
-                        ImageButton imageButton = findViewById(R.id.imageButton);
+                        ImageButton imageButton = findViewById(R.id.addImage);
                         imageButton.setImageBitmap(imageScaled);
                     }
                 }
@@ -509,6 +585,12 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     @Override
     public void finishFormActivity() {
         Log.d(TAG, "Inside startFormActivity");
+        finish();
+    }
+    @Override
+    public void finishFormActivity(EntityFish fish) {
+        Log.d(TAG, "Inside startFormActivity");
+        presenter.insertFish(fish);
         finish();
     }
 }

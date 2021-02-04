@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/buttonSearch"
+                android:id="@+id/buttonSave"
                 android:layout_width="78dp"
                 android:layout_height="94dp"
                 android:layout_marginStart="134dp"
@@ -42,7 +42,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-                app:layout_constraintTop_toBottomOf="@+id/released"
+                app:layout_constraintTop_toBottomOf="@+id/loose"
                 app:srcCompat="@drawable/guardar"
                 tools:ignore="MissingConstraints" />
 
@@ -57,7 +57,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/released"
+                app:layout_constraintTop_toBottomOf="@+id/loose"
                 app:srcCompat="@drawable/borrar"
                 tools:ignore="MissingConstraints" />
 
@@ -69,13 +69,13 @@
                 android:layout_marginTop="55dp"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintStart_toEndOf="@+id/addImage"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/eliminar_imagen"
                 tools:ignore="MissingConstraints" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/addImage"
                 android:layout_width="104dp"
                 android:layout_height="118dp"
                 android:layout_marginStart="43dp"
@@ -83,7 +83,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/imagen"
+                app:srcCompat="@android:drawable/ic_menu_camera"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
@@ -147,7 +147,7 @@
                 tools:ignore="MissingConstraints" />
 
             <Switch
-                android:id="@+id/released"
+                android:id="@+id/loose"
                 android:layout_width="221dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="103dp"
@@ -155,7 +155,7 @@
                 android:text="Suelta"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                app:layout_constraintTop_toBottomOf="@+id/addImage"
                 tools:ignore="MissingConstraints" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -294,7 +294,7 @@
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                app:layout_constraintTop_toBottomOf="@+id/addImage"
                 app:srcCompat="@drawable/calendario" />
 
             <ImageButton

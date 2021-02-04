@@ -3,8 +3,12 @@ package com.example.fishingapp.models;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EntityFish {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class EntityFish extends RealmObject {
+
+    @PrimaryKey
     private String id;
     private String date;
     private String fish;
@@ -13,6 +17,8 @@ public class EntityFish {
     private String fisher;
     private String information;
     private String image;
+    private String sex;
+    private boolean loose;
 
 
 
@@ -62,6 +68,22 @@ public class EntityFish {
 
     }
 
+    public boolean isLoose() {
+        return loose;
+    }
+
+    public void setLoose(boolean loose) {
+        this.loose = loose;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String getFish() {
         return fish;
     }
@@ -90,7 +112,7 @@ public class EntityFish {
     public int setWeight(String weight) {
         int error = 0;
         if (!weight.isEmpty()){
-            Pattern pat = Pattern.compile("[^A-Za-z0-9.@_-~#\\s]+");
+            Pattern pat = Pattern.compile("^[0-9]+([,][0-9]+)?$");
             Matcher mat = pat.matcher(weight);
             if(!mat.find()){
                 error = 2;

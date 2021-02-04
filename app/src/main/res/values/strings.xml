@@ -41,5 +41,9 @@
     <string name="chooseImage">Selecciona la imagen que deseas</string>
     <string name="deleteAlert">¿Está seguro que desea eliminar?</string>
     <string name="confirmDelete">Confirmar eliminación</string>
+    <string name="results">resultados</string>
+    <string name="NewSex">Nuevo sexo</string>
+    <string name="InsertNewSex">Inserte el nuevo sexo</string>
+    <string name="selected">seleccionar</string>
 
 </resources>

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/buttonSearch"
+                android:id="@+id/buttonSave"
                 android:layout_width="78dp"
                 android:layout_height="94dp"
                 android:layout_marginStart="264dp"
@@ -75,7 +75,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="40dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toStartOf="@+id/spinnerSex"
+                app:layout_constraintEnd_toStartOf="@+id/spinnerSexSearch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageFish"
                 app:srcCompat="@drawable/sexo"
@@ -107,15 +107,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextDate">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextFish"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tipo de pez"
                     android:fontFamily="@font/aerolite"
+                    android:hint="Tipo de pez"
                     android:textSize="24sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
-                android:id="@+id/spinnerSex"
+                android:id="@+id/spinnerSexSearch"
                 android:layout_width="240dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="45dp"

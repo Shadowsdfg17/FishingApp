@@ -36,8 +36,8 @@ public class FishAdapter extends RecyclerView.Adapter<FishAdapter.FishViewHolder
 
         public FishViewHolder(View itemView) {
             super(itemView);
-            TextView_fish = (TextView) itemView.findViewById(R.id.firstName);
-            TextView_fisher = (TextView) itemView.findViewById(R.id.firstName2);
+            TextView_fish = (TextView) itemView.findViewById(R.id.Name);
+            TextView_fisher = (TextView) itemView.findViewById(R.id.fishCaptured);
             photo=(ImageView) itemView.findViewById(R.id.photo);
         }
 

@@ -4,11 +4,16 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.fishingapp.interfaces.IListInterface;
+import com.example.fishingapp.models.EntityFish;
+import com.example.fishingapp.models.FishModel;
+
+import java.util.ArrayList;
 
 public class ListPresenter implements IListInterface.Presenter {
 
     private IListInterface.view view;
     private static final String TAG = "presenters/ListPresenter";
+    private final FishModel model = new FishModel();
 
     public ListPresenter(IListInterface.view view){
         this.view = view;
@@ -24,6 +29,23 @@ public class ListPresenter implements IListInterface.Presenter {
     public void onToast() {
         Log.d(TAG,"Inside onToast");
         view.startDeleteToast();
+    }
+
+    @Override
+    public boolean insert(EntityFish fish) {
+        return model.insert(fish);
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public ArrayList<EntityFish> getAllItemsSummarize() {
+        Log.d(TAG,"Inside getItemsSummarize");
+        return model.getAllSummarize();
+    }
+
+    @Override
+    public boolean deleteFish(EntityFish fish) {
+        return model.deleteFish(fish);
     }
 
     @SuppressLint("LongLogTag")
@@ -52,6 +74,21 @@ public class ListPresenter implements IListInterface.Presenter {
         Log.d(TAG, "Inside onClickRecyclerViewItem");
         view.startFormActivity(id);
 
+    }
+
+    public ArrayList<EntityFish> getItemsByCriterion(String criterion, String type) {
+        if (criterion.equals("sex")) {
+            return FishModel.getItemsBySex(type);
+        } else if (criterion.equals("fish")) {
+            return FishModel.getItemsByFish(type);
+        } else if (criterion.equals("date")) {
+            return  FishModel.getItemsByDate(type);
+        }
+        return null;
+    }
+
+    public ArrayList<EntityFish> getItemsByAllCriterion(String sex, String date, String fish) {
+        return FishModel.getItemsByAllCriterion(sex, date, fish);
     }
 
 

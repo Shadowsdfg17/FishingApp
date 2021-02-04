@@ -15,7 +15,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/firstName"
+        android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
@@ -25,7 +25,7 @@
         tools:text="@tools:sample/first_names" />
 
     <TextView
-        android:id="@+id/firstName2"
+        android:id="@+id/fishCaptured"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
