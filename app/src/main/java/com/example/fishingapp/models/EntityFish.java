@@ -48,7 +48,7 @@ public class EntityFish extends RealmObject {
 
     public int setDate(String date) {
         int error = 0;
-        if(!date.isEmpty()){
+        if(date != null && !date.isEmpty()){
             Pattern pat = Pattern.compile("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)" +
                     "(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)" +
                     "0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|" +
@@ -76,6 +76,7 @@ public class EntityFish extends RealmObject {
         this.loose = loose;
     }
 
+
     public String getSex() {
         return sex;
     }
@@ -90,7 +91,7 @@ public class EntityFish extends RealmObject {
 
     public int setFish(String fish) {
         int error = 0;
-        if (!fish.isEmpty()){
+        if (fish !=null && !fish.isEmpty()){
             Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(fish);
             if(!mat.find()){
@@ -111,7 +112,7 @@ public class EntityFish extends RealmObject {
 
     public int setWeight(String weight) {
         int error = 0;
-        if (!weight.isEmpty()){
+        if (weight!=null && !weight.isEmpty()){
             Pattern pat = Pattern.compile("^[0-9]+([,][0-9]+)?$");
             Matcher mat = pat.matcher(weight);
             if(!mat.find()){
@@ -133,8 +134,8 @@ public class EntityFish extends RealmObject {
 
     public int setCaptures(String captures) {
         int error = 0;
-        if (!captures.isEmpty()){
-            Pattern pat = Pattern.compile("[0-9]");
+        if (captures != null && !captures.isEmpty()){
+            Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(captures);
             if(!mat.find()){
                 error = 2;
@@ -154,7 +155,7 @@ public class EntityFish extends RealmObject {
 
     public int setFisher(String fisher) {
         int error = 0;
-        if (!fisher.isEmpty()){
+        if (fisher != null && !fisher.isEmpty()){
             Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(fisher);
             if(!mat.find()){
@@ -175,7 +176,7 @@ public class EntityFish extends RealmObject {
 
     public int setInformation(String information) {
         int error = 0;
-        if (!information.isEmpty()){
+        if (information != null && !information.isEmpty()){
             Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
             Matcher mat = pat.matcher(information);
             if(!mat.find()){

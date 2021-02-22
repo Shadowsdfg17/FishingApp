@@ -84,6 +84,9 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     private EntityFish fish2 = new EntityFish();
     private String image;
 
+    private EntityFish eFish = new EntityFish();
+    private boolean update = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -370,19 +373,14 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
         //------------INSERTAR FORMULARIO---------
 
         button.setOnClickListener(v -> {
-            if(DateTE.getText().toString().isEmpty() && FishTE.getText().toString().isEmpty() && spinner.getSelectedItem().toString().isEmpty()
-                    && WeightTE.getText().toString().isEmpty() && CapturesTE.getText().toString().isEmpty() && FisherTE.getText().toString().isEmpty()
-                    && InformationTE.getText().toString().isEmpty()){
-                Log.d(TAG,"Missing Data");
-            }else{
-                fish.setDate(DateTE.getText().toString());
-                fish.setFish(FishTE.getText().toString());
-                fish.setSex(spinner.getSelectedItem().toString());
-                fish.setWeight(WeightTE.getText().toString());
-                fish.setCaptures(CapturesTE.getText().toString());
-                fish.setFisher(FisherTE.getText().toString());
-                fish.setInformation(InformationTE.getText().toString());
-                fish.setLoose(loose.isActivated());
+            if(eFish.setDate(DateTE.getText().toString()) == 0 &&
+               eFish.setFish(FishTE.getText().toString()) == 0 &&
+                eFish.setWeight(WeightTE.getText().toString()) == 0 &&
+                eFish.setCaptures(CapturesTE.getText().toString()) == 0 &&
+                eFish.setFisher(FisherTE.getText().toString()) == 0 &&
+                eFish.setInformation(InformationTE.getText().toString()) == 0){
+
+                eFish.setLoose(loose.isActivated());
 
                 if (addImage != null && addImage.getDrawable() != null) {
                     Bitmap bitmap = ((BitmapDrawable) addImage.getDrawable()).getBitmap();
@@ -393,20 +391,26 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                         String photoBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
                         fish.setImage(photoBase64);
                     }
+            }
+                eFish.setSex(spinner.getSelectedItem().toString());
+                if (id != null) {
+                    update = false;
                 }
-                if(id!= null){
-                    presenter.onClickSaveFish(fish, false);
-                }else{
+                presenter.onClickSaveFish(eFish, update);
 
-                    presenter.onClickSaveFish(fish, true);
-                }
+            } else {
+                Log.d(TAG, "Error");
             }
             finish();
-
         });
 
-
     }
+
+
+
+
+
+
 
     //--------BORRAR IMAGEN----------
 
