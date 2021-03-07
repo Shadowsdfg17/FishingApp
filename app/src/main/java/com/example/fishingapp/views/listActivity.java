@@ -175,6 +175,7 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     }
 
 
+
     //------CREA LAS OPCIONES DEL MENÚ-----------
 
 
@@ -197,6 +198,9 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
             case R.id.aboutus:
                 presenter.onClickAboutUs();
                 break;
+            case R.id.help:
+                presenter.onClickHelp();
+                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -212,6 +216,9 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     protected void onResume() {
         Log.d(TAG, "Starting onResume");
         super.onResume();
+        System.out.println("Sexo" + sex);
+        System.out.println("Fecha" + date);
+        System.out.println("Pez" + fish);
 
         if (sex != null && date == null && fish == null) {
             items.clear();
@@ -221,7 +228,7 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
             items = presenter.getItemsByCriterion("date", date);
         } else if (fish != null && sex == null && date == null) {
             items.clear();
-            items = presenter.getItemsByCriterion("title", fish);
+            items = presenter.getItemsByCriterion("fish", fish);
         } else if (fish != null && sex != null && date != null) {
             items.clear();
             items = presenter.getItemsByAllCriterion(sex, date, fish);
@@ -292,7 +299,7 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
     public void startSearchActivity(){
         Log.d(TAG, "Inside startSearchActivity");
         Intent intent = new Intent(getApplicationContext(), searchActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
     @Override
@@ -328,12 +335,20 @@ public class listActivity extends AppCompatActivity implements IListInterface.vi
         Toast.makeText(MyApplication.getContext(),"Borrado con éxito",Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void startHelpActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("Ayuda", "https://shadowsdfg17.github.io/FishingApp/listado.html");
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1){
             if(resultCode == 1){
+                Log.d("Hola", "En ActivityResult");
                 fish = data.getStringExtra("fish");
                 sex = data.getStringExtra("sex");
                 date = data.getStringExtra("date");

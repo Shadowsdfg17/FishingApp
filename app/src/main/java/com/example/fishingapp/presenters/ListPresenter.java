@@ -91,5 +91,10 @@ public class ListPresenter implements IListInterface.Presenter {
         return FishModel.getItemsByAllCriterion(sex, date, fish);
     }
 
+    @Override
+    public void onClickHelp() {
+        view.startHelpActivity();
+    }
+
 
 }

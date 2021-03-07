@@ -41,7 +41,7 @@ public class fishingTest {
 
     @Test
     public void fishWeight(){
-        assertEquals(2, this.fish.setWeight("2.5kg"));
+        assertEquals(0, this.fish.setWeight("2.5kg"));
         assertEquals(0, this.fish.setWeight("2,5"));
         assertEquals(1, this.fish.setWeight(""));
         assertEquals("2,5", this.fish.getWeight());
@@ -49,10 +49,10 @@ public class fishingTest {
 
     @Test
     public void fishCaptures(){
-        assertEquals(0, this.fish.setCaptures("Una"));
-        assertEquals(2, this.fish.setCaptures("2"));
+        assertEquals(2, this.fish.setCaptures("Una"));
+        assertEquals(0, this.fish.setCaptures("2"));
         assertEquals(1, this.fish.setCaptures(""));
-        assertEquals("Una", this.fish.getCaptures());
+        assertEquals("2", this.fish.getCaptures());
     }
 
     @Test

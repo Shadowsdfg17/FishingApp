@@ -145,4 +145,9 @@ public class FormPresenter implements IFormActivity.Presenter {
     public EntityFish getItemsById(String id){
         return model.getById(id);
     }
+
+    @Override
+    public void onClickHelp() {
+        view.startHelpActivity();
+    }
 }

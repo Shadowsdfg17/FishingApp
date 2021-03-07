@@ -1,5 +1,6 @@
 package com.example.fishingapp.views;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,6 +23,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -229,7 +233,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setWeight(WeightTE.getText().toString()) == 1) {
                         WeightTIL.setError(presenter.getError("Weigth"));
                         WeightTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if (fish.setFish(WeightTE.getText().toString()) == 2) {
+                    } else if (fish.setWeight(WeightTE.getText().toString()) == 2) {
                         WeightTIL.setError(presenter.getError("Weight2"));
                         WeightTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
@@ -257,7 +261,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setCaptures(CapturesTE.getText().toString()) == 1) {
                         CapturesTIL.setError(presenter.getError("Captures"));
                         CapturesTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if (fish.setFish(CapturesTE.getText().toString()) == 2) {
+                    } else if (fish.setCaptures(CapturesTE.getText().toString()) == 2) {
                         CapturesTIL.setError(presenter.getError("Captures2"));
                         CapturesTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
@@ -284,7 +288,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setFisher(FisherTE.getText().toString()) == 1) {
                         FisherTIL.setError(presenter.getError("Fisher"));
                         FisherTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if (fish.setFish(FisherTE.getText().toString()) == 2) {
+                    } else if (fish.setFisher(FisherTE.getText().toString()) == 2) {
                         FisherTIL.setError(presenter.getError("Fisher2"));
                         FisherTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
@@ -310,7 +314,7 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                     if (fish.setInformation(InformationTE.getText().toString()) == 1) {
                         InformationTIL.setError(presenter.getError("Information"));
                         InformationTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
-                    } else if (fish.setFish(InformationTE.getText().toString()) == 2) {
+                    } else if (fish.setInformation(InformationTE.getText().toString()) == 2) {
                         InformationTIL.setError(presenter.getError("Information2"));
                         InformationTIL.setErrorTextColor(ColorStateList.valueOf(Color.RED));
                     }
@@ -358,9 +362,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
             FisherTE.setText(fish3.getFisher());
             InformationTE.setText(fish3.getInformation());
             image=fish3.getImage();
-            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            buttonGallery.setImageBitmap(decodedByte);
+            if(image != null){
+                byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                buttonGallery.setImageBitmap(decodedByte);
+            }
             spinner.setSelection(adapter.getPosition(fish3.getSex()));
 
             //Recupero la info de esa entidad
@@ -396,10 +402,11 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                 if (id != null) {
                     update = false;
                 }
+                System.out.println("El pescao" + update);
                 presenter.onClickSaveFish(eFish, update);
 
             } else {
-                Log.d(TAG, "Error");
+                Log.d(TAG, "Error missing fields");
             }
             finish();
         });
@@ -501,6 +508,27 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
                 REQUEST_SELECT_IMAGE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+
+    //---------OPCIONES SELECCIONADAS (BUSCAR Y SOBRE NOSOTROS)---------
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.help:
+                presenter.onClickHelp();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     //---------MUESTRA ERROR----------
 
     @Override
@@ -513,6 +541,13 @@ public class FormActivity extends AppCompatActivity implements IFormActivity.vie
     @Override
     public void IntentChooser() {
         ActivityCompat.requestPermissions(FormActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+    }
+
+    @Override
+    public void startHelpActivity() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("Ayuda", "https://shadowsdfg17.github.io/FishingApp/formulario.html");
+        startActivity(intent);
     }
 
     //----------RESULTADO DEL PEDIDO DE PERMISOS---------

@@ -21,6 +21,8 @@ public interface IFormActivity {
 
             void IntentChooser();
 
+            void startHelpActivity();
+
 
         }
 
@@ -47,6 +49,8 @@ public interface IFormActivity {
             ArrayList<String> getAllSex();
 
             EntityFish getItemsById(String id);
+
+            void onClickHelp();
 
         }
     }

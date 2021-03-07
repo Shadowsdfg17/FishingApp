@@ -45,5 +45,6 @@
     <string name="NewSex">Nuevo sexo</string>
     <string name="InsertNewSex">Inserte el nuevo sexo</string>
     <string name="selected">seleccionar</string>
+    <string name="Help">Ayuda</string>
 
 </resources>

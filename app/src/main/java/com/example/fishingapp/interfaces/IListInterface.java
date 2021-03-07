@@ -19,6 +19,8 @@ public interface IListInterface {
 
     void startDeleteToast();
 
+    void startHelpActivity();
+
     }
 
 
@@ -45,6 +47,8 @@ public interface IListInterface {
         ArrayList<EntityFish> getItemsByCriterion(String sex, String sex1);
 
         ArrayList<EntityFish> getItemsByAllCriterion(String sex, String date, String fish);
+
+        void onClickHelp();
     }
 
 

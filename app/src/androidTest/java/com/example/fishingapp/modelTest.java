@@ -64,15 +64,15 @@ public class modelTest {
         @Test
         public void getFishById(){
             assertEquals(id, this.model.getById(id).getId());
-            assertEquals("carpa", this.model.getById(id).getFish());
+            assertEquals("trucha", this.model.getById(id).getFish());
         }
 
 
         @Test
         public void getAllSex(){
             ArrayList<String> sex = new ArrayList<>();
-            sex.add("h");
             sex.add("hembra");
+            sex.add("Macho");
             assertEquals(sex, this.model.getAllSexs());
         }
 
@@ -83,7 +83,7 @@ public class modelTest {
 
                 assertEquals(0, this.model.getItemsByAllCriterion("Hembra", "20/10/2020", "Tiburon").size());
                 assertEquals(0, this.model.getItemsByFish("Sardina").size());
-                assertEquals(0, this.model.getItemsBySex("Macho").size());
+                assertEquals(1, this.model.getItemsBySex("Macho").size());
                 assertEquals(0, this.model.getItemsByDate("31/01/2021").size());
 
         }

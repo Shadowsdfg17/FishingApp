@@ -33,4 +33,9 @@ public class searchPresenter implements ISearchActivity.Presenter {
     public ArrayList<String> getAllSex() {
         return model.getAllSexs();
     }
+
+    @Override
+    public void onClickHelp() {
+        view.startHelpActivity();
+    }
 }

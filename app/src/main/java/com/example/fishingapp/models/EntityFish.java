@@ -113,7 +113,7 @@ public class EntityFish extends RealmObject {
     public int setWeight(String weight) {
         int error = 0;
         if (weight!=null && !weight.isEmpty()){
-            Pattern pat = Pattern.compile("^[0-9]+([,][0-9]+)?$");
+            Pattern pat = Pattern.compile("[1-9]");
             Matcher mat = pat.matcher(weight);
             if(!mat.find()){
                 error = 2;
@@ -135,7 +135,7 @@ public class EntityFish extends RealmObject {
     public int setCaptures(String captures) {
         int error = 0;
         if (captures != null && !captures.isEmpty()){
-            Pattern pat = Pattern.compile("[a-zA-ZñÑ\\s]");
+            Pattern pat = Pattern.compile("[0-9]");
             Matcher mat = pat.matcher(captures);
             if(!mat.find()){
                 error = 2;
@@ -189,5 +189,21 @@ public class EntityFish extends RealmObject {
             error = 1;
         }
         return error;
+    }
+
+    @Override
+    public String toString() {
+        return "EntityFish{" +
+                "id='" + id + '\'' +
+                ", date='" + date + '\'' +
+                ", fish='" + fish + '\'' +
+                ", weight='" + weight + '\'' +
+                ", captures='" + captures + '\'' +
+                ", fisher='" + fisher + '\'' +
+                ", information='" + information + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", loose=" + loose +
+                '}';
     }
 }

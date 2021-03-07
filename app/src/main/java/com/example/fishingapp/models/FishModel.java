@@ -78,17 +78,7 @@ public class FishModel {
         Realm realm = Realm.getDefaultInstance();
         try {
             realm.beginTransaction();
-            EntityFish entityFish = realm.where(EntityFish.class).equalTo("id", fish.getId()).findFirst();
-            entityFish.setImage(fish.getImage());
-            entityFish.setDate(fish.getDate());
-            entityFish.setFish(fish.getFish());
-            entityFish.setWeight(fish.getWeight());
-            entityFish.setCaptures(fish.getCaptures());
-            entityFish.setFisher(fish.getFisher());
-            entityFish.setInformation(fish.getInformation());
-            entityFish.setSex(fish.getSex());
-            entityFish.setLoose(fish.isLoose());
-            realm.insertOrUpdate(entityFish);
+            realm.copyToRealmOrUpdate(fish);
             realm.commitTransaction();
             flag = true;
         } catch (Exception e) {
